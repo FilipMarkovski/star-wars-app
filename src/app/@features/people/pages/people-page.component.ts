@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable} from "rxjs";
+import {AfterContentInit, Component, Input, OnInit} from '@angular/core';
+import {Observable, of} from "rxjs";
 import {People} from "../models/people.model";
 import {Router} from "@angular/router";
 import {PeopleService} from "../services/people.service";
+import {delay, filter, map, tap} from "rxjs/operators";
+import {PageEvent} from "@angular/material/paginator";
+import {PeopleWrapper} from "../models/people-wrapper.model";
 
 @Component({
   selector: 'app-people',
@@ -11,13 +14,18 @@ import {PeopleService} from "../services/people.service";
 })
 export class PeoplePageComponent implements OnInit {
   list$: Observable<People[]>;
+  temp$: Observable<People[]>;
 
-  constructor(private router: Router, private peopleService: PeopleService) {
-  }
+  page: number = 1;
+  itemsPerPage: number = 10;
+  totalItems: number;
+
+  loading: boolean;
+
+  constructor(private router: Router, private peopleService: PeopleService) {}
 
   ngOnInit() {
-    console.log('people page');
-    this.list$ = this.peopleService.fetch();
+    this.getPage(1);
   }
 
   action(data: { url: string }): void {
@@ -25,4 +33,24 @@ export class PeoplePageComponent implements OnInit {
     const id = splittedUrl[splittedUrl.length - 2];
     this.router.navigate(['/people', id]);
   }
+
+  getPage(page: number): void {
+    this.loading = true;
+    this.list$ = this.serverCall(page).pipe(
+      tap(res => {
+        this.totalItems = res.count;
+        this.page = page;
+        this.loading = false;
+      }),
+      map(res => res.results)
+    );
+  }
+
+  /**
+   * Simulate an async HTTP call with a delayed observable.
+   */
+  serverCall(page: number): Observable<PeopleWrapper> {
+    return this.peopleService.fetchByPage(page);
+  }
+
 }

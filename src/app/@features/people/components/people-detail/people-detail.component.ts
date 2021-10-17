@@ -3,7 +3,7 @@ import {People} from "../../models/people.model";
 import {Observable} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {PeopleService} from "../../services/people.service";
-import {filter, switchMap} from "rxjs/operators";
+import {filter, map, switchMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-people-detail',

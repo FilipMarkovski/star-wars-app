@@ -1,0 +1,13 @@
+.d-flex {
+  display: flex;
+
+  & > mat-card {
+    width: 50%;
+    padding: 15px;
+    margin: 0;
+  }
+}
+
+.justify-content-right {
+  justify-content: right;
+}

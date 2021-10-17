@@ -9,11 +9,13 @@ import {HttpClientModule} from "@angular/common/http";
 import {BaseService} from "./@shared/services/base.service";
 import {PeopleService} from "./@features/people/services/people.service";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {RouterModule} from "@angular/router";
-import {MatListModule} from "@angular/material/list";
-import {MatCardModule} from "@angular/material/card";
+import { RouterModule } from "@angular/router";
+import { MatListModule } from "@angular/material/list";
+import { MatCardModule } from "@angular/material/card";
 import { PeoplePageComponent } from './@features/people/pages/people-page.component';
 import { PeopleDetailComponent } from './@features/people/components/people-detail/people-detail.component';
+import {NgxPaginationModule} from "ngx-pagination";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { PeopleDetailComponent } from './@features/people/components/people-deta
     RouterModule,
     BrowserAnimationsModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    NgxPaginationModule,
+    MatPaginatorModule
   ],
   providers: [BaseService, PeopleService],
   bootstrap: [AppComponent]
