@@ -1,0 +1,10 @@
+<mat-list role="list">
+  <mat-list-item
+    *ngFor="let item of list"
+    (click)="onClick(item)"
+    style="border-bottom: 1px solid #e5e5e5"
+    role="listitem"
+  >
+    {{ item[displayPropName] }}
+  </mat-list-item>
+</mat-list>

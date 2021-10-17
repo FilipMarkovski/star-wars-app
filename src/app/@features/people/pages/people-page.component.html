@@ -1,0 +1,8 @@
+<div style="display: flex">
+  <mat-card *ngIf="list$ | async as list" style="padding: 15px; margin: 0; width: 100%">
+    <app-list style="width: 100%" [list]="list" [displayPropName]="'name'" (itemClicked)="action($event)"></app-list>
+  </mat-card>
+  <mat-card style="padding: 15px; margin: 0; width: 100%">
+    <router-outlet></router-outlet>
+  </mat-card>
+</div>

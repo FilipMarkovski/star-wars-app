@@ -1,0 +1,23 @@
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+
+@Component({
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.scss']
+})
+export class ListComponent implements OnInit {
+
+  @Input() list: any[];
+  @Input() displayPropName: string;
+  @Output() itemClicked: EventEmitter<any> = new EventEmitter<any>();
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  onClick(item: any) {
+    this.itemClicked.emit(item);
+  }
+
+}
