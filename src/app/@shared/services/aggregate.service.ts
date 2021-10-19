@@ -12,13 +12,17 @@ export class AggregateService {
 
   fetchResourceWithSearchTerm(resourceUrl: string, term: string) {
     let searchParam = new HttpParams().set('search', term);
-    // console.log('ovo radi');
     return this.http.get<any>(resourceUrl, { params: searchParam }).pipe(
       map((response) => {
-        // console.log('EEEE ovde sam');
         return response.results;
       })
     );
+  }
+
+  fetchByPage(resourceUrl: string, page: any) {
+    let params = new HttpParams().set('page', page);
+
+    return this.http.get<any>(resourceUrl, { params: params });
   }
 
 }

@@ -27,7 +27,7 @@
                       }"
                 (click)="onClick(item)"
                 class="resource-list-button"
-        >{{ item[displayPropName] }}</button>
+        >{{ item[displayPropName] ? item[displayPropName] : item['title'] }}</button>
       </div>
 
     </div>

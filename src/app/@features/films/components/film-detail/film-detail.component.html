@@ -1,0 +1,15 @@
+<ng-container *ngIf="item$ | async as item; else loader;">
+  <h2>{{ item.title }}</h2>
+  <mat-list role="list">
+
+    <mat-list-item role="listitem">Star Wars: Episode {{ item.episode_id }}</mat-list-item>
+    <mat-list-item role="listitem">Release date: {{ item.release_date | date }}</mat-list-item>
+    <mat-list-item role="listitem">Director: {{ item.director }}</mat-list-item>
+  </mat-list>
+</ng-container>
+
+<ng-template #loader>
+  <div>
+    <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
+  </div>
+</ng-template>

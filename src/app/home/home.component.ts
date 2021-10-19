@@ -2,15 +2,16 @@ import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {forkJoin, fromEvent, Observable, of} from "rxjs";
 import {debounceTime, distinctUntilChanged, filter, map, tap} from "rxjs/operators";
 import { apiUrls } from '../@shared';
-import {BaseService} from "../@shared/services/base.service";
 import {merge} from 'rxjs';
-import {BaseWrapper} from "../@shared/models/base.model";
 import {AggregateService} from "../@shared/services/aggregate.service";
 import {Router} from "@angular/router";
 
 import {People} from "../@features/people/models/people.model";
-import {PeopleWrapper} from "../@features/people/models/people-wrapper.model";
-import {PeopleService} from "../@features/people/services/people.service";
+import {Film} from "../@features/films/models/film.model";
+import {Planet} from "../@features/planets/models/planet.model";
+import {Starship} from "../@features/starships/models/starship.model";
+import {Vehicle} from "../@features/vehicles/models/vehicle.model";
+import {Species} from "../@features/species/models/species.model";
 
 @Component({
   selector: 'app-home',
@@ -34,20 +35,18 @@ export class HomeComponent implements OnInit {
 
   shouldLoadContainer: boolean;
 
+  currentResource: string = '';
+
   constructor(
     private aggregateService: AggregateService,
-    private router: Router,
-    private peopleService: PeopleService
+    private router: Router
   ) {
     this.isSearching = false;
     this.apiResponse = [];
-
-    console.log(this.swapiSearchInput);
   }
 
   ngOnInit(): void {
     this.shouldLoadContainer = false;
-    console.log(this.swapiSearchInput);
 
     fromEvent(this.swapiSearchInput.nativeElement, 'keyup').pipe(
       map((event: any) => {
@@ -60,14 +59,12 @@ export class HomeComponent implements OnInit {
       this.isSearching = true;
       this.apiResponse = [];
       this.searchGetCall(text).subscribe((res: any[]) => {
-        // console.log('res', res);
         this.isSearching = false;
 
         if (res.length == 1) {
           this.apiResponse.push(res[0]);
         } else if (res.length > 1) {
           res.forEach((element) => {
-            // console.log('element:', element);
             this.apiResponse.push(element);
           });
         }
@@ -94,21 +91,20 @@ export class HomeComponent implements OnInit {
   }
 
   action(data: { url: string }): void {
-    console.log('data: ', data);
-    console.log('this.router.url: ', this.router.url);
+    // console.log('data:', data);
     const splittedUrl = data.url.split('/');
     const id = splittedUrl[splittedUrl.length - 2];
-    this.router.navigate(['/people', id]);
+    this.currentResource = splittedUrl[splittedUrl.length - 3];
+    // console.log('id:', id);
+    // console.log('resource:', this.currentResource);
+    this.router.navigate([`/${this.currentResource}`, id]);
     this.shouldLoadContainer = true;
   }
 
   fetchResource(resource: string) {
     resource = resource.toLowerCase();
     this.isPageable = true;
-
-    // if (apiUrls.has(resource)) {
-    //   this.getPage(1);
-    // }
+    this.currentResource = resource;
 
     switch (resource) {
       case 'people':
@@ -116,11 +112,25 @@ export class HomeComponent implements OnInit {
         this.getPage(1);
         break;
       case 'films':
+        this.list$ = new Observable<Film[]>();
+        this.getPage(1);
+        break;
       case 'starships':
+        this.list$ = new Observable<Starship[]>();
+        this.getPage(1);
+        break;
       case 'vehicles':
+        this.list$ = new Observable<Vehicle[]>();
+        this.getPage(1);
+        break;
       case 'species':
+        this.list$ = new Observable<Species[]>();
+        this.getPage(1);
+        break;
       case 'planets':
-        console.log('Not yet implemented');
+        this.list$ = new Observable<Planet[]>();
+        this.getPage(1);
+        break;
     }
   }
 
@@ -136,8 +146,9 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  serverCall(page: number): Observable<PeopleWrapper> {
-    return this.peopleService.fetchByPage(page);
+  serverCall(page: number): Observable<any> {
+    let baseUrl = apiUrls.get(this.currentResource)!;
+    return this.aggregateService.fetchByPage(baseUrl, page);
   }
 
 }

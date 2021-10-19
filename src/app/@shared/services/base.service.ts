@@ -11,29 +11,20 @@ export class BaseService<T,U> {
 
   constructor(public http: HttpClient, @Inject(String) private baseUrl: string) {}
 
-  fetch(): Observable<T> {
-    return this.http.get<any>(this.baseUrl).pipe(
-      tap((result) => console.log(result))
-    );
-  }
+  // fetch(): Observable<T> {
+  //   return this.http.get<any>(this.baseUrl).pipe(
+  //     tap((result) => console.log(result))
+  //   );
+  // }
 
   fetchByPage(page: any): Observable<T> {
     let params = new HttpParams().set('page', page);
 
-    return this.http.get<T>(this.baseUrl, { params: params }).pipe(
-      tap((result) => console.log(result))
-    );
+    return this.http.get<T>(this.baseUrl, { params: params });
   }
 
   fetchById(id: string): Observable<U> {
-    return this.http.get<U>(`${this.baseUrl}/${id}`).pipe(tap((response) => console.log(response)));
-  }
-
-  fetchResourceWithSearchTerm(resourceUrl: string, term: string) {
-    let searchParam = new HttpParams().set('search', term);
-    return this.http.get<any>(resourceUrl, { params: searchParam }).pipe(
-      map(response => response.results)
-    );
+    return this.http.get<U>(`${this.baseUrl}/${id}`);
   }
 
 }
