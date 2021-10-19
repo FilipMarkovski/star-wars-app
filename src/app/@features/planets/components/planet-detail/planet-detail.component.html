@@ -1,0 +1,14 @@
+<ng-container *ngIf="item$ | async as item; else loader;">
+  <h2>{{ item.name }}</h2>
+  <mat-list role="list">
+
+    <mat-list-item role="listitem">Terrain: {{ item.terrain }}</mat-list-item>
+    <mat-list-item role="listitem">Population: {{ item.population !== 'unknown' ? (item.population | number:'0.0-0') : 'unknown' }}</mat-list-item>
+  </mat-list>
+</ng-container>
+
+<ng-template #loader>
+  <div>
+    <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
+  </div>
+</ng-template>

@@ -9,11 +9,7 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
 
-  constructor(private router: Router, private authenticationService: AuthenticationService) {
-  }
-
-  logout() {
-    this.authenticationService.logout().subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
+  constructor() {
   }
 
 }

@@ -9,10 +9,50 @@
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
+
+$primary: rgb(255, 232, 31);
+$black: rgb(0, 0, 0);
+$white: rgb(255, 255, 255);
+
+
+$star-wars-yellow-palette: (
+  50: #FFFCE4,
+  100: #FFF8BC,
+  200: #FFF48F,
+  300: #FFEF62,
+  400: #FFEB41,
+  500: #FFE81F,
+  600: #FFE51B,
+  700: #FFE217,
+  800: #FFDE12,
+  900: #FFD80A,
+  A100: #FFFFFF,
+  A200: #FFFDF5,
+  A400: #FFF4C2,
+  A700: #FFF0A8,
+  contrast: (
+    50: $black,
+    100: $black,
+    200: $black,
+    300: $black,
+    400: $black,
+    500: $black,
+    600: $black,
+    700: $black,
+    800: $black,
+    900: $black,
+    A100: $black,
+    A200: $black,
+    A400: $black,
+    A700: $black,
+  )
+);
+
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$star-wars-app-primary: mat.define-palette(mat.$indigo-palette);
+$star-wars-app-primary: mat.define-palette($star-wars-yellow-palette);
 $star-wars-app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
@@ -36,15 +76,16 @@ $star-wars-app-theme: mat.define-light-theme((
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
 
-$primary: rgb(255, 232, 31);
-$black: rgb(0, 0, 0);
-
-html, body { height: 100%; }
+html, body { height:100%; color: $white;}
 
 body {
   margin: 0;
   font-family: 'Nunito', 'sans-serif' !important;
   font-size: 18px !important;
+  background-image: url('/assets/star-wars-backgrounds-25.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .row {
@@ -57,52 +98,68 @@ a:hover {
   text-decoration: none;
 }
 
-header {
-  background: $black;
-  padding: 1em 0;
+.navbar-brand {
 
-  & + .container {
-    margin-top: 50px !important;
+  figure {
+    margin-bottom: 0;
   }
 
-  & > .container {
-    width: 80%;
-    margin: 0 auto;
-  }
-
-  a {
-    color: white !important;
-    text-decoration: none;
-  }
-  a.logo {
-    font-weight: bold;
-  }
-
-  nav {
-    float: right;
-
-    ul {
-      list-style-type: none;
-      margin: 0;
-      display: flex;
-
-      li a {
-        padding: 1em;
-
-        &:hover {
-          background: darken($primary, 10%);
-        }
-      }
-    }
+  img {
+    width: 120px;
   }
 }
+  //header {
+  //  background: $black;
+  //  padding: 1em 0;
+  //
+  //  & + .container {
+  //    //margin-top: 50px !important;
+  //  }
+  //
+  //  & > .container {
+  //    width: 80%;
+  //    margin: 0 auto;
+  //  }
+  //
+  //  a {
+  //    color: white !important;
+  //    text-decoration: none;
+  //  }
+  //  a.logo {
+  //    font-weight: bold;
+  //  }
+  //
+  //  nav {
+  //    float: right;
+  //
+  //    ul {
+  //      list-style-type: none;
+  //      margin: 0;
+  //      display: flex;
+  //
+  //      li a {
+  //        padding: 1em;
+  //
+  //        &:hover {
+  //          background: darken($primary, 10%);
+  //        }
+  //      }
+  //    }
+  //  }
+  //}
 
 h1 {
   margin-top: 2em;
 }
 
-.ngx-pagination {
+pagination-controls .ngx-pagination {
   margin-top: 15px;
   padding-left: 0;
   text-align: center;
+
+  .current {
+    background: $primary;
+    color: $black;
+  }
 }
+

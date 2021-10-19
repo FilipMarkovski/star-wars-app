@@ -26,6 +26,7 @@ import { PlanetDetailComponent } from './@features/planets/components/planet-det
 import { SpeciesDetailComponent } from './@features/species/components/species-detail/species-detail.component';
 import { StarshipDetailComponent } from './@features/starships/components/starship-detail/starship-detail.component';
 import { VehicleDetailComponent } from './@features/vehicles/components/vehicle-detail/vehicle-detail.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { VehicleDetailComponent } from './@features/vehicles/components/vehicle-
     PlanetDetailComponent,
     SpeciesDetailComponent,
     StarshipDetailComponent,
-    VehicleDetailComponent
+    VehicleDetailComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

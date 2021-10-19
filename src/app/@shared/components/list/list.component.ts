@@ -15,11 +15,6 @@ export class ListComponent implements OnInit {
   @Input() page: number;
   @Input() totalItems: number;
 
-  // @Input() page: number = 1;
-  // @Input() next?: string;
-  // itemsPerPage: number = 10;
-  // @Input() totalItems: number;
-
   constructor() { }
 
   ngOnInit(): void {

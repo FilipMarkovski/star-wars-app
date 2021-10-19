@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {forkJoin, fromEvent, Observable, of} from "rxjs";
+import {fromEvent, Observable, of} from "rxjs";
 import {debounceTime, distinctUntilChanged, filter, map, tap} from "rxjs/operators";
 import { apiUrls } from '../@shared';
 import {merge} from 'rxjs';
@@ -81,22 +81,18 @@ export class HomeComponent implements OnInit {
     }
     this.isPageable = false;
     let observables: Observable<any>[] = [];
-    // let observables = apiUrls.map(api => this.aggregateService.fetchResourceWithSearchTerm(api['url'], term)); // get an array of observables
 
     apiUrls.forEach((value) => {
-      observables.push(this.aggregateService.fetchResourceWithSearchTerm(value, term));
+      observables.push(this.aggregateService.fetchResourceWithSearchTerm(value, term)); // get an array of observables
     })
 
     return observables.reduce((previous, current) => merge(previous, current), of({})); // merge all observable in the list into one.
   }
 
   action(data: { url: string }): void {
-    // console.log('data:', data);
     const splittedUrl = data.url.split('/');
     const id = splittedUrl[splittedUrl.length - 2];
     this.currentResource = splittedUrl[splittedUrl.length - 3];
-    // console.log('id:', id);
-    // console.log('resource:', this.currentResource);
     this.router.navigate([`/${this.currentResource}`, id]);
     this.shouldLoadContainer = true;
   }
