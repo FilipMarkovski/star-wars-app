@@ -1,8 +1,8 @@
 .d-flex {
-  display: flex;
+  //display: flex;
 
   & > mat-card {
-    width: 50%;
+    //width: 50%;
     padding: 15px;
     margin: 0;
   }
@@ -10,4 +10,8 @@
 
 .justify-content-right {
   justify-content: right;
+}
+
+.resource-list-container {
+  min-height: 250px;
 }

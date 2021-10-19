@@ -14,17 +14,18 @@ import {PeopleWrapper} from "../models/people-wrapper.model";
 })
 export class PeoplePageComponent implements OnInit {
   list$: Observable<People[]>;
-  temp$: Observable<People[]>;
 
   page: number = 1;
   itemsPerPage: number = 10;
   totalItems: number;
 
-  loading: boolean;
+  @Input() isLoading: boolean;
+  shouldLoadContainer: boolean;
 
   constructor(private router: Router, private peopleService: PeopleService) {}
 
   ngOnInit() {
+    this.shouldLoadContainer = false;
     this.getPage(1);
   }
 
@@ -32,15 +33,16 @@ export class PeoplePageComponent implements OnInit {
     const splittedUrl = data.url.split('/');
     const id = splittedUrl[splittedUrl.length - 2];
     this.router.navigate(['/people', id]);
+    this.shouldLoadContainer = true;
   }
 
   getPage(page: number): void {
-    this.loading = true;
+    this.isLoading = true;
     this.list$ = this.serverCall(page).pipe(
       tap(res => {
         this.totalItems = res.count;
         this.page = page;
-        this.loading = false;
+        this.isLoading = false;
       }),
       map(res => res.results)
     );

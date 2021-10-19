@@ -47,17 +47,31 @@ body {
   font-size: 18px !important;
 }
 
-.container {
-  width: 80%;
-  margin: 0 auto;
+.row {
+  display: block;
+  flex-wrap: nowrap;
+}
+
+a:hover {
+  color: $primary;
+  text-decoration: none;
 }
 
 header {
   background: $black;
   padding: 1em 0;
 
+  & + .container {
+    margin-top: 50px !important;
+  }
+
+  & > .container {
+    width: 80%;
+    margin: 0 auto;
+  }
+
   a {
-    color: white;
+    color: white !important;
     text-decoration: none;
   }
   a.logo {
@@ -87,3 +101,8 @@ h1 {
   margin-top: 2em;
 }
 
+.ngx-pagination {
+  margin-top: 15px;
+  padding-left: 0;
+  text-align: center;
+}
