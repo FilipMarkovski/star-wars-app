@@ -9,12 +9,12 @@ const routes: Routes = [
   { path: '',
     canActivate: [AuthenticationGuard],
     children: [
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'people',
-        component: PeoplePageComponent,
+      { path: '',
+        component: HomeComponent,
         children: [
-          { path: ':id', component: PeopleDetailComponent }
-        ]}
+          { path: 'people/:id', component: PeopleDetailComponent }
+        ]
+      },
     ] },
 ];
 
