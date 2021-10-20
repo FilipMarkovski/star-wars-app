@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
   ) {
     this.isSearching = false;
     this.apiResponse = [];
+    document.body.classList.add('home-page');
   }
 
   ngOnInit(): void {

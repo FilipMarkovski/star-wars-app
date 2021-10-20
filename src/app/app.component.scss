@@ -28,3 +28,11 @@
 
   }
 }
+
+@media (max-width: 767px) {
+  .sound-container {
+    right: 0;
+    left: 0;
+    justify-content: center;
+  }
+}

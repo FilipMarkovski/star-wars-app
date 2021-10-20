@@ -32,6 +32,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
     this.isLoading = true;
     const login$ = this.authenticationService.login(this.loginForm.value);
     login$

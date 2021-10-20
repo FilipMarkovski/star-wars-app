@@ -11,3 +11,20 @@
 .resource-list-container {
   min-height: 250px;
 }
+
+.categories-container {
+  button {
+    margin: 10px;
+  }
+}
+
+@media (max-width: 767px) {
+  .home-container {
+    display: block !important;
+    margin-top: 160px;
+
+    & > .container:last-child {
+      padding-bottom: 100px;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<div class="d-flex flex-wrap justify-content-center align-content-center" style="height: 100%;">
+<div class="d-flex flex-wrap justify-content-center align-content-center home-container" style="height: 100%;">
 
   <div class="container text-center">
     <div class="row">
@@ -13,7 +13,7 @@
 
         <div class="container">
           <div class="row">
-            <div class="col-12 d-flex justify-content-center align-items-center">
+            <div class="col-12 d-flex flex-wrap justify-content-center align-items-center categories-container">
               <button mat-raised-button color="primary" (click)="fetchResource('people')">People</button>
               <button mat-raised-button color="primary" (click)="fetchResource('films')">Films</button>
               <button mat-raised-button color="primary" (click)="fetchResource('starships')">Starships</button>
@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container ">
     <div class="row">
       <div class="d-flex flex-wrap justify-content-center col-12 mt-5">
 

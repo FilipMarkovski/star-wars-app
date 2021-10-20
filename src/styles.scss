@@ -100,3 +100,12 @@ mat-card.mat-card,
     justify-content: center;
   }
 }
+
+@media (max-width: 767px) {
+  body.home-page {
+    overflow: scroll;
+    background-repeat: repeat-y;
+    padding-bottom: 200px;
+    height: fit-content;
+  }
+}
