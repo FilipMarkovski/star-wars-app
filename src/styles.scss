@@ -1,77 +1,4 @@
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@use '~@angular/material' as mat;
-// Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat.core();
-
-
-$primary: rgb(255, 232, 31);
-$black: rgb(0, 0, 0);
-$white: rgb(255, 255, 255);
-
-
-$star-wars-yellow-palette: (
-  50: #FFFCE4,
-  100: #FFF8BC,
-  200: #FFF48F,
-  300: #FFEF62,
-  400: #FFEB41,
-  500: #FFE81F,
-  600: #FFE51B,
-  700: #FFE217,
-  800: #FFDE12,
-  900: #FFD80A,
-  A100: #FFFFFF,
-  A200: #FFFDF5,
-  A400: #FFF4C2,
-  A700: #FFF0A8,
-  contrast: (
-    50: $black,
-    100: $black,
-    200: $black,
-    300: $black,
-    400: $black,
-    500: $black,
-    600: $black,
-    700: $black,
-    800: $black,
-    900: $black,
-    A100: $black,
-    A200: $black,
-    A400: $black,
-    A700: $black,
-  )
-);
-
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$star-wars-app-primary: mat.define-palette($star-wars-yellow-palette);
-$star-wars-app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$star-wars-app-warn: mat.define-palette(mat.$red-palette);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$star-wars-app-theme: mat.define-light-theme((
-  color: (
-    primary: $star-wars-app-primary,
-    accent: $star-wars-app-accent,
-    warn: $star-wars-app-warn,
-  )
-));
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($star-wars-app-theme);
+@import "./_variables";
 
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
@@ -81,11 +8,14 @@ html, body { height:100%; color: $white;}
 body {
   margin: 0;
   font-family: 'Nunito', 'sans-serif' !important;
+  //font-family: 'Pathway Gothic One', sans-serif !important;
   font-size: 18px !important;
   background-image: url('/assets/star-wars-backgrounds-25.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  overflow: hidden;
+  position: relative;
 }
 
 .row {
@@ -108,48 +38,11 @@ a:hover {
     width: 120px;
   }
 }
-  //header {
-  //  background: $black;
-  //  padding: 1em 0;
-  //
-  //  & + .container {
-  //    //margin-top: 50px !important;
-  //  }
-  //
-  //  & > .container {
-  //    width: 80%;
-  //    margin: 0 auto;
-  //  }
-  //
-  //  a {
-  //    color: white !important;
-  //    text-decoration: none;
-  //  }
-  //  a.logo {
-  //    font-weight: bold;
-  //  }
-  //
-  //  nav {
-  //    float: right;
-  //
-  //    ul {
-  //      list-style-type: none;
-  //      margin: 0;
-  //      display: flex;
-  //
-  //      li a {
-  //        padding: 1em;
-  //
-  //        &:hover {
-  //          background: darken($primary, 10%);
-  //        }
-  //      }
-  //    }
-  //  }
-  //}
 
 h1 {
   margin-top: 2em;
+  font-size: 40px !important;
+  font-weight: bold !important;
 }
 
 pagination-controls .ngx-pagination {
@@ -163,3 +56,47 @@ pagination-controls .ngx-pagination {
   }
 }
 
+input.form-control,
+input.form-control:focus,
+mat-card.mat-card {
+  color: map-get($star-wars-app-primary, default);
+  background-color: $black-light;
+}
+input.form-control,
+input.form-control:focus,
+mat-card.mat-card,
+.mat-stroked-button:not(.mat-button-disabled) {
+  border-color: $primary;
+}
+
+.ngx-pagination {
+
+  a, button {
+    color: $primary !important;
+
+    &:hover {
+      background: transparent !important;
+      border: 1px solid $primary;
+    }
+  }
+
+  .disabled {
+    color: rgba($primary, 0.30) !important;
+  }
+}
+
+.mat-list-base .mat-list-item {
+  color: $white;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-label {
+  color: rgba(255, 255, 255, 0.54);
+}
+
+.item-detail-container {
+  text-align: center;
+
+  .mat-list-item .mat-list-item-content {
+    justify-content: center;
+  }
+}

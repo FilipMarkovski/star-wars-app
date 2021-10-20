@@ -59,8 +59,8 @@ export class HomeComponent implements OnInit {
       this.isSearching = true;
       this.apiResponse = [];
       this.searchGetCall(text).subscribe((res: any[]) => {
-        this.isSearching = false;
 
+        this.isSearching = false;
         if (res.length == 1) {
           this.apiResponse.push(res[0]);
         } else if (res.length > 1) {

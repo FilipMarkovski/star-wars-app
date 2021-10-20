@@ -1,3 +1,19 @@
 <router-outlet></router-outlet>
 
+<div class="sound-container">
 
+<!--  <embed src="/assets/star-wars-theme.mp3" type="audio/mpeg" id="bgThemeSong" autostart="true" #themeSong>-->
+
+  <audio autoplay preload="auto" #themeSong [volume]="volume">
+    <source src="/assets/star-wars-theme.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+
+
+  <div class="sound-control">
+    <mat-slider color="primary" min="0" max="1" step="0.1" (input)="volume = $event.value!" [value]="volume"></mat-slider>
+    <button mat-fab color="primary" (click)="toggleMusic()" aria-label="Example icon button with a volume_up icon">
+      <mat-icon>{{ volume > 0 && this.icon == 'volume_up' ? 'volume_up' : 'volume_off' }}</mat-icon>
+    </button>
+  </div>
+</div>

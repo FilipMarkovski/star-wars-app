@@ -8,6 +8,7 @@ import {MaterialModule} from "../material.module";
 import {AuthRoutingModule} from "./auth-routing.module";
 import {LoginComponent} from './login.component';
 import {SharedModule} from "../@shared/shared.module";
+import {MovieIntroComponent} from "../@shared/components/movie-intro/movie-intro.component";
 
 @NgModule({
   imports: [
@@ -16,9 +17,9 @@ import {SharedModule} from "../@shared/shared.module";
     FlexLayoutModule,
     MaterialModule,
     AuthRoutingModule,
-    SharedModule
+    SharedModule,
   ],
-  declarations: [LoginComponent]
+  declarations: [LoginComponent, MovieIntroComponent]
 })
 export class AuthModule {
 }
